@@ -55,7 +55,7 @@ def dashboard(req):
         }
         
         if lists.exists():
-            recent_list = lists.order_by("-updated_at")[0]
+            recent_list = lists.order_by("-date").first()
             tasks = Task.objects.filter(list_id=recent_list)
 
             context['list'] = recent_list
