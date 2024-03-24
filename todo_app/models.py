@@ -14,7 +14,7 @@ class List(models.Model):
         ]
     
 class Task(models.Model):
-    task = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
     list_id = models.ForeignKey(List, on_delete=models.CASCADE, null=True)
     
     date = models.DateTimeField(auto_now_add=True)
