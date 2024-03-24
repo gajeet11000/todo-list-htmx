@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from datetime import date
 
@@ -69,3 +70,17 @@ def dashboard(req):
             # context["tasks"] is already None
             
         return render(req, "todo_app/dashboard.html", context)
+    
+def save_task(req):
+    if req.method == "POST":
+        task = req.POST.get("new_task")
+        list_id = req.POST.get("list_id")
+        
+        new_task = Task.objects.create(
+            name=task,
+            list_id=List.objects.get(id=list_id),
+        )
+        
+        new_task.save()
+        
+        return HttpResponse("<li>" + task + "</li>")
