@@ -28,7 +28,7 @@ def login(req):
     if req.method == "GET":
         
         new_form = LoginForm()
-        return render(req, "todo_app/register.html", {"form": new_form})
+        return render(req, "todo_app/login.html", {"form": new_form})
     
     elif req.method == "POST":
         
@@ -46,4 +46,26 @@ def login(req):
     
 
 def dashboard(req):
-    return render(req, "todo_app/dashboard.html")
+    if req.method == "GET":
+        lists = List.objects.filter(user=req.user)
+        
+        context = {
+            "list": None,
+            "tasks": None
+        }
+        
+        if lists.exists():
+            recent_list = lists.order_by("-updated_at")[0]
+            tasks = Task.objects.filter(list_id=recent_list)
+
+            context['list'] = recent_list
+            context['tasks'] = tasks
+        else:
+            new_list = List.objects.create(
+                title=date.today().strftime("%d, %B"),
+                user=req.user
+            )
+            context['list'] = new_list
+            # context["tasks"] is already None
+            
+        return render(req, "todo_app/dashboard.html", context)
