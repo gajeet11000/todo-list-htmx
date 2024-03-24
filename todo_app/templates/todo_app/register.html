@@ -1,0 +1,15 @@
+{% extends 'todo_app/base.html' %}
+
+
+{% block title_html %}
+   Register | TodoHx 
+{% endblock title_html %}
+
+
+{% block body_html %}
+   <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+   </form> 
+{% endblock body_html %}
+    
