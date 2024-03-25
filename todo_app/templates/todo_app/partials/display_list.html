@@ -1,0 +1,22 @@
+<ul style="list-style-type: none;">
+    {% for task in tasks %}
+        <li>
+            <input type="checkbox"
+                id="task_{{task.id}}"
+                hx-patch="{% url 'toggle-completion' task.id %}"
+                hx-swap="none"
+                    {% if task.completed %}
+                        checked
+                    {% endif %}>
+            <label for="task_{{task.id}}">{{task.name}}</label>
+            <span>
+                <button class="btn btn-link"
+                hx-patch="{% url 'update-task' task.id %}"
+                hx-target="closest li"
+                hx-swap="outerHTML">
+                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                </button>
+            </span>
+        </li>
+    {% endfor %}
+</ul>
