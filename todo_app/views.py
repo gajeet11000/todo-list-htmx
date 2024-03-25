@@ -106,3 +106,10 @@ def toggle_completion(req, task_id):
         task.save()
         
         return JsonResponse({"success": True}, status=200)
+    
+def delete_task(req, task_id):
+    if req.method == "DELETE":
+        task = Task.objects.get(id=task_id)
+        task.delete()
+        
+        return JsonResponse({"success": True}, status=200)

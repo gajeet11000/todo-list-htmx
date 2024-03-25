@@ -8,11 +8,21 @@
             {% endif %}>
     <label for="task_{{task.id}}" >{{task.name}}</label>
     <span>
-        <button class="btn btn-link"
-        hx-patch="{% url 'update-task' task.id %}"
-        hx-target="closest li"
-        hx-swap="outerHTML">
-            <i class="fa-regular fa-pen-to-square fa-lg"></i>
-        </button>
+        <span>
+            <button class="btn btn-link"
+            hx-patch="{% url 'update-task' task.id %}"
+            hx-target="closest li"
+            hx-swap="outerHTML">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+            </button>
+        </span>
+        <span>
+            <button class="btn btn-link"
+            hx-delete="{% url 'delete-task' task.id %}"
+            hx-target="closest li"
+            hx-swap="delete">
+                <i class="fa-regular fa-circle-xmark fa-lg"></i>
+            </button>
+        </span>
     </span>
 </li>
