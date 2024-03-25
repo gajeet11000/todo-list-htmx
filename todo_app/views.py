@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from datetime import date
 
@@ -83,4 +83,26 @@ def save_task(req):
         
         new_task.save()
         
-        return HttpResponse("<li>" + task + "</li>")
+        all_tasks = Task.objects.filter(list_id=list_id)
+        return render(req, "todo_app/partials/display_list.html", {"tasks": all_tasks})
+        
+    
+def update_task(req, task_id):
+    task = Task.objects.get(id=task_id)
+    if req.method == "GET":
+        return render(req, "todo_app/partials/single_task.html", {"task": task})
+    elif req.method == "PATCH":
+        return render(req, "todo_app/partials/patch_task_container.html", {"task": task})
+    elif req.method == "POST":
+        new_task_name = req.POST.get("updated_task")
+        task.name=new_task_name
+        task.save()
+        return render(req, "todo_app/partials/single_task.html", {"task": task})
+    
+def toggle_completion(req, task_id):
+    if req.method == "PATCH":
+        task = Task.objects.get(id=task_id)
+        task.completed = not task.completed
+        task.save()
+        
+        return JsonResponse({"success": True}, status=200)
