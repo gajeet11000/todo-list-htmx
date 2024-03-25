@@ -7,4 +7,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("login", views.login, name="login"),
     path("save-task", views.save_task, name="save-task"),
+    path("update-task/<int:task_id>", views.update_task, name="update-task"),
+    path("toggle-completion/<int:task_id>", views.toggle_completion, name="toggle-completion"),
 ]
