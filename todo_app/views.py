@@ -7,6 +7,7 @@ from django.contrib import auth
 from . models import List, Task
 from . forms import CreateUserForm, LoginForm
 
+from django.core.exceptions import ValidationError
 
 
 def index(req):
@@ -113,3 +114,16 @@ def delete_task(req, task_id):
         task.delete()
         
         return JsonResponse({"success": True}, status=200)
+    
+def create_new_list(req):
+    if req.method == "POST":
+        title = req.POST.get("list_title")
+        try:
+            new_list = List.objects.create(
+                title=title,
+                user=req.user
+            )
+            new_list.save()
+            return redirect('dashboard')
+        except ValidationError:
+            return JsonResponse({"success": False}, status=500)

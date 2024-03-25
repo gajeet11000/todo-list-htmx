@@ -1,0 +1,23 @@
+<div class="modal fade" id="create-list-form-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="create-list-modal-title">Create New List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form
+            id="create-list-form"
+            method="post"
+            action="{% url 'create-list' %}">
+            {% csrf_token %}
+            <input type="text" name="list_title" placeholder="New list title ...">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="create-list-form">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
