@@ -1,32 +1,50 @@
-<ul>
-    {% for task in tasks %}
-        <li>
-            <input type="checkbox"
-                id="task_{{task.id}}"
-                hx-patch="{% url 'toggle-completion' task.id %}"
-                hx-swap="none"
-                    {% if task.completed %}
-                        checked
-                    {% endif %}>
-            <label for="task_{{task.id}}">{{task.name}}</label>
-            <span>
+<section>
+    <h1>{{list.title}}</h1>
+</section>
+<section>
+    <div>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <input type="checkbox"
+                    id="task_{{task.id}}"
+                    hx-patch="{% url 'toggle-completion' task.id %}"
+                    hx-swap="none"
+                        {% if task.completed %}
+                            checked
+                        {% endif %}>
+                <label for="task_{{task.id}}">{{task.name}}</label>
                 <span>
-                    <button class="btn btn-link"
-                    hx-patch="{% url 'update-task' task.id %}"
-                    hx-target="closest li"
-                    hx-swap="outerHTML">
-                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                    </button>
+                    <span>
+                        <button class="btn btn-link"
+                        hx-patch="{% url 'update-task' task.id %}"
+                        hx-target="closest li"
+                        hx-swap="outerHTML">
+                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                        </button>
+                    </span>
+                    <span>
+                        <button class="btn btn-link"
+                        hx-delete="{% url 'delete-task' task.id %}"
+                        hx-target="closest li"
+                        hx-swap="delete">
+                            <i class="fa-regular fa-circle-xmark fa-lg"></i>
+                        </button>
+                    </span>
                 </span>
-                <span>
-                    <button class="btn btn-link"
-                    hx-delete="{% url 'delete-task' task.id %}"
-                    hx-target="closest li"
-                    hx-swap="delete">
-                        <i class="fa-regular fa-circle-xmark fa-lg"></i>
-                    </button>
-                </span>
-            </span>
-        </li>
-    {% endfor %}
-</ul>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+    <div>
+        <form
+        method="post" 
+        hx-post="{% url 'save-task' %}"
+        hx-target="header"
+        hx-on::after-request="this.reset()">
+            <input type="hidden" name="list_id" value="{{list.id}}">
+            <input type="text" name="new_task" placeholder="Add new task ...">
+            <button type="submit">+</button>
+        </form>
+    </div>
+</section>

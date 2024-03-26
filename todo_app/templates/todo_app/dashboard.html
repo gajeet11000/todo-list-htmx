@@ -8,26 +8,7 @@
 
 {% block body_html %}
     <header>
-        <section>
-            <h1>{{list.title}}</h1>
-        </section>
-        <section>
-            <div>
-                {% include 'todo_app/partials/display_list.html' %}
-            </div>
-            <div>
-                <form
-                method="post" 
-                hx-post="{% url 'save-task' %}"
-                hx-target="ul"
-                hx-swap="outerHTML"
-                hx-on::after-request="this.reset()">
-                    <input type="hidden" name="list_id" value="{{list.id}}">
-                    <input type="text" name="new_task" placeholder="Add new task ...">
-                    <button type="submit">+</button>
-                </form>
-            </div>
-        </section>
+        {% include 'todo_app/partials/display_list.html' %}
     </header>
 
     {% include 'todo_app/partials/create_list_modal.html' %}

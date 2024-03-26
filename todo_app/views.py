@@ -78,15 +78,17 @@ def save_task(req):
         task = req.POST.get("new_task")
         list_id = req.POST.get("list_id")
         
+        list = List.objects.get(id=list_id)
+        
         new_task = Task.objects.create(
             name=task,
-            list_id=List.objects.get(id=list_id),
+            list_id=list
         )
         
         new_task.save()
-        
         all_tasks = Task.objects.filter(list_id=list_id)
-        return render(req, "todo_app/partials/display_list.html", {"tasks": all_tasks})
+        
+        return render(req, "todo_app/partials/display_list.html", {"tasks": all_tasks, "list": list})
         
     
 def update_task(req, task_id):
