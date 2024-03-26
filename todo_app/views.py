@@ -145,10 +145,17 @@ def search_list(req):
             for word in words[1:]:
                 query |= Q(title__icontains=word)
                 
-            lists_data = List.objects.filter(query, user=req.user)
+            lists_data = List.objects.filter(query, user=req.user).order_by("-date")
             
             context["search_results"] = lists_data
         else:
-            context["search_results"] = List.objects.filter(user=req.user)
+            context["search_results"] = List.objects.filter(user=req.user).order_by("-date")
             
         return render(req, "todo_app/partials/search_result.html", context)
+    
+def delete_list(req, list_id):
+    if req.method == "DELETE":
+        task = List.objects.get(id=list_id, user=req.user)
+        task.delete()
+        
+        return JsonResponse({"success": True}, status=200)

@@ -2,6 +2,15 @@
     {% for list in search_results %}
         <li>
             <h4>{{list.title}}</h4>
+            <span>
+                <button type="button" class="btn btn-danger"
+                    hx-delete="{% url 'delete-list' list.id %}"
+                    hx-target="closest li"
+                    hx-swap="delete"
+                    hx-confirm="Are you sure you want to delete this list?">
+                    Delete
+                </button>
+            </span>
         </li> 
     {% endfor %}
 </ul>
