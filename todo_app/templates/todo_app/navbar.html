@@ -3,4 +3,13 @@
     <a href="{% url 'register' %}">Register</a>
     <a href="{% url 'login' %}">Login</a>
     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#create-list-form-modal">Create List</button>
+
+    <button type="button" class="btn btn-link"
+        data-bs-toggle="modal"
+        data-bs-target="#lists-search-modal"
+        hx-get="{% url 'search-list' %}"
+        hx-trigger="click"
+        hx-target="#search-results">
+        Your Lists
+    </button>
 </nav>

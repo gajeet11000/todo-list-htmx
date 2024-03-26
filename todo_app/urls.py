@@ -11,4 +11,5 @@ urlpatterns = [
     path("toggle-completion/<int:task_id>", views.toggle_completion, name="toggle-completion"),
     path("delete-task/<int:task_id>", views.delete_task, name="delete-task"),
     path("create-list", views.create_new_list, name="create-list"),
+    path("search-list", views.search_list, name="search-list"),
 ]

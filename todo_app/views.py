@@ -9,6 +9,7 @@ from . forms import CreateUserForm, LoginForm
 
 from django.core.exceptions import ValidationError
 
+from django.db.models import Q
 
 def index(req):
     return render(req, "todo_app/index.html")
@@ -127,3 +128,27 @@ def create_new_list(req):
             return redirect('dashboard')
         except ValidationError:
             return JsonResponse({"success": False}, status=500)
+        
+def search_list(req):
+    if req.method == "GET":
+        search_input = req.GET.get("search_input", "")
+        search_input = search_input.strip()
+        
+        context = {
+            "search_results" : None
+        }
+        
+        if search_input:
+            words = search_input.split()
+            query = Q(title__icontains=words[0])
+            
+            for word in words[1:]:
+                query |= Q(title__icontains=word)
+                
+            lists_data = List.objects.filter(query, user=req.user)
+            
+            context["search_results"] = lists_data
+        else:
+            context["search_results"] = List.objects.filter(user=req.user)
+            
+        return render(req, "todo_app/partials/search_result.html", context)
