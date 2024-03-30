@@ -46,32 +46,13 @@ def login(req):
             if user is not None:
                 auth.login(req, user)
                 return redirect("dashboard")
+        else:
+            return render(req, "todo_app/login.html", {"form": filled_form})
     
 
 def dashboard(req):
     if req.method == "GET":
-        lists = List.objects.filter(user=req.user)
-        
-        context = {
-            "list": None,
-            "tasks": None
-        }
-        
-        if lists.exists():
-            recent_list = lists.order_by("-date").first()
-            tasks = Task.objects.filter(list_id=recent_list)
-
-            context['list'] = recent_list
-            context['tasks'] = tasks
-        else:
-            new_list = List.objects.create(
-                title=date.today().strftime("%d, %B"),
-                user=req.user
-            )
-            context['list'] = new_list
-            # context["tasks"] is already None
-            
-        return render(req, "todo_app/dashboard.html", context)
+        return render(req, "todo_app/dashboard.html")
     
 def save_task(req):
     if req.method == "POST":
@@ -152,7 +133,7 @@ def search_list(req):
             context["search_results"] = lists_data
         else:
             context["search_results"] = List.objects.filter(user=req.user).order_by("-date")
-            
+        
         return render(req, "todo_app/partials/search_result.html", context)
     
 def delete_list(req, list_id):
@@ -160,4 +141,31 @@ def delete_list(req, list_id):
         task = List.objects.get(id=list_id, user=req.user)
         task.delete()
         
-        return JsonResponse({"success": True}, status=200)
+        response =  JsonResponse({"success": True}, status=200)
+        response["HX-Trigger"] = "customDeleteEvent"
+        return response
+    
+def fetch_list(req):
+    if req.method == "GET":
+        lists = List.objects.filter(user=req.user)
+        
+        context = {
+            "list": None,
+            "tasks": None
+        }
+        
+        if lists.exists():
+            recent_list = lists.order_by("-date").first()
+            tasks = Task.objects.filter(list_id=recent_list)
+
+            context['list'] = recent_list
+            context['tasks'] = tasks
+        else:
+            new_list = List.objects.create(
+                title=date.today().strftime("%d, %B"),
+                user=req.user
+            )
+            context['list'] = new_list
+            # context["tasks"] is already None
+            
+        return render(req, "todo_app/partials/display_list.html", context)

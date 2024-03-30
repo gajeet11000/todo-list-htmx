@@ -13,4 +13,5 @@ urlpatterns = [
     path("create-list", views.create_new_list, name="create-list"),
     path("search-list", views.search_list, name="search-list"),
     path("delete-list/<int:list_id>", views.delete_list, name="delete-list"),
+    path("fetch-list", views.fetch_list, name="fetch-list"),
 ]
