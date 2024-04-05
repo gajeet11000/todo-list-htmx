@@ -1,0 +1,16 @@
+<h1 id="list-title">{{list.title}}
+    <div class="shade">
+        <button type="button" id="update-list" class="shade-btn"
+            hx-patch="{% url 'update-list' list.id %}"
+            hx-target="#list-title"
+            hx-swap="outerHTML">
+            <span class="fa-regular fa-pen-to-square"></span>
+        </button>
+        <button type="button" id="delete-list" class="shade-btn"
+            hx-delete="{% url 'delete-list' list.id %}"
+            hx-swap="none"
+            hx-confirm="Are you sure you want to delete this list?">
+            <span class="fa-regular fa-trash-can"></span>
+        </button>
+    </div>
+</h1>
