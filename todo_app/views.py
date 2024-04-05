@@ -169,3 +169,15 @@ def fetch_list(req):
             # context["tasks"] is already None
             
         return render(req, "todo_app/partials/display_list.html", context)
+    
+def update_list(req, list_id):
+    list = List.objects.get(id=list_id)
+    if req.method == "GET":
+        return render(req, "todo_app/partials/list_title.html", {"list": list})
+    elif req.method == "PATCH":
+        return render(req, "todo_app/partials/patch_list_container.html", {"list": list})
+    elif req.method == "POST":
+        new_list_title = req.POST.get("updated_list")
+        list.title=new_list_title
+        list.save()
+        return render(req, "todo_app/partials/list_title.html", {"list": list})
