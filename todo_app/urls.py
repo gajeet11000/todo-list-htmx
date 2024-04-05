@@ -14,4 +14,5 @@ urlpatterns = [
     path("search-list", views.search_list, name="search-list"),
     path("delete-list/<int:list_id>", views.delete_list, name="delete-list"),
     path("fetch-list", views.fetch_list, name="fetch-list"),
+    path("update-list/<int:list_id>", views.update_list, name="update-list"),
 ]
