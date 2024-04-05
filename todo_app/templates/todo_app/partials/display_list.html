@@ -1,15 +1,7 @@
 <section class="title-container">
-    <h1 id="list-title">{{list.title}}
-        <div class="shade">
-            <button type="button" id="update-list" class="shade-btn">
-                <span class="fa-regular fa-pen-to-square"></span>
-            </button>
-            <button type="button" id="delete-list" class="shade-btn">
-                <span class="fa-regular fa-trash-can"></span>
-            </button>
-        </div>
-    </h1>
+    {% include 'todo_app/partials/list_title.html' %}
 </section>
+
 <section>
     <div>
     <ul>
