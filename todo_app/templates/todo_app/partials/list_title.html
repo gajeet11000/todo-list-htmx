@@ -8,8 +8,18 @@
         </button>
         <button type="button" id="delete-list" class="shade-btn"
             hx-delete="{% url 'delete-list' list.id %}"
+            hx-trigger="confirmed"
             hx-swap="none"
-            hx-confirm="Are you sure you want to delete this list?">
+            onclick="deleteListConfirmation().then((result) => {
+                if (result.isConfirmed) {
+                    htmx.trigger(this, 'confirmed');
+                    Swal.fire({
+                        text: 'List successfully deleted',
+                        icon: 'success',
+                        timer: 3000,
+                    });
+                }
+            })">
             <span class="fa-regular fa-trash-can"></span>
         </button>
     </div>
