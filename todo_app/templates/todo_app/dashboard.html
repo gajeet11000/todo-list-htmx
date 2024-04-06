@@ -8,7 +8,7 @@
 
 {% block body_html %}
 
-    <header hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
+    <header id="todo-list" hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
     </header>
 
     {% include 'todo_app/partials/create_list_modal.html' %}
