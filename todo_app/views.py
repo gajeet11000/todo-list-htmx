@@ -163,27 +163,35 @@ def delete_list(req, list_id):
     
 def fetch_list(req):
     if req.method == "GET":
-        lists = List.objects.filter(user=req.user)
+        list_id = req.GET.get("list_id", None)
         
-        context = {
-            "list": None,
-            "tasks": None
-        }
-        
-        if lists.exists():
-            recent_list = lists.order_by("-date").first()
-            tasks = Task.objects.filter(list_id=recent_list)
-
-            context['list'] = recent_list
-            context['tasks'] = tasks
+        if list_id:
+            context = {
+                "list" : List.objects.get(user=req.user, id=list_id),
+                "tasks" : Task.objects.filter(list_id=list_id),
+            }
         else:
-            new_list = List.objects.create(
-                title=date.today().strftime("%d, %B"),
-                user=req.user
-            )
-            context['list'] = new_list
-            # context["tasks"] is already None
+            lists = List.objects.filter(user=req.user)
             
+            context = {
+                "list": None,
+                "tasks": None
+            }
+            
+            if lists.exists():
+                recent_list = lists.order_by("-date").first()
+                tasks = Task.objects.filter(list_id=recent_list)
+
+                context['list'] = recent_list
+                context['tasks'] = tasks
+            else:
+                new_list = List.objects.create(
+                    title=date.today().strftime("%d, %B"),
+                    user=req.user
+                )
+                context['list'] = new_list
+                # context["tasks"] is already None
+                
         return render(req, "todo_app/partials/display_list.html", context)
     
 def update_list(req, list_id):
