@@ -11,8 +11,15 @@ from django.core.exceptions import ValidationError
 
 from django.db.models import Q
 
+from django.contrib import messages
+
 def index(req):
     return render(req, "todo_app/index.html")
+
+def logout(req):
+    auth.logout(req)
+    messages.success(req, "Logged out successfully", extra_tags="logout")
+    return redirect("index")
 
 def register(req):
     if req.method == "GET":
@@ -25,6 +32,9 @@ def register(req):
         filled_form = CreateUserForm(req.POST)
         if filled_form.is_valid():
             filled_form.save()
+            
+            messages.success(req, "User created successfully", extra_tags="register")
+            
             return redirect("login")
 
 def login(req):
@@ -45,6 +55,9 @@ def login(req):
             
             if user is not None:
                 auth.login(req, user)
+                
+                messages.success(req, "Signed in successfully", extra_tags="login")
+                
                 return redirect("dashboard")
         else:
             return render(req, "todo_app/login.html", {"form": filled_form})
@@ -108,6 +121,9 @@ def create_new_list(req):
                 user=req.user
             )
             new_list.save()
+            
+            messages.success(req, new_list.title, extra_tags="create_list")
+            
             return redirect('dashboard')
         except ValidationError:
             return JsonResponse({"success": False}, status=500)
@@ -138,9 +154,9 @@ def search_list(req):
     
 def delete_list(req, list_id):
     if req.method == "DELETE":
-        task = List.objects.get(id=list_id, user=req.user)
-        task.delete()
-        
+        list = List.objects.get(id=list_id, user=req.user)
+        list.delete()
+         
         response =  JsonResponse({"success": True}, status=200)
         response["HX-Trigger"] = "customDeleteEvent"
         return response
