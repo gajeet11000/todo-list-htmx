@@ -32,13 +32,12 @@
     $(document).on('click', function(event) {
         let outsideClick = !$('#search-results').is(event.target) && $('#search-results').has(event.target).length === 0;
 
-        outsideClick = outsideClick && (!$('#search-list').is(event.target) && $('#search-list').has(event.target).length === 0);
+        outsideClick = outsideClick && (!$('#search-input').is(event.target) && $('#search-input').has(event.target).length === 0);
 
         if (outsideClick) {
             $('#search-results').addClass("hidden");
-            $('#search-list').val("")
+            $('#search-input').val("")
         }
-         // Just to display the result
     });
     </script>
 
