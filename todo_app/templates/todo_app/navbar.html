@@ -1,15 +1,53 @@
-<nav>
-    <a href="{% url 'dashboard' %}">Dashboard</a>
-    <a href="{% url 'register' %}">Register</a>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'logout' %}">Logout</a>
-    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#create-list-form-modal">Create List</button>
+<nav class="navbar navbar-expand-xl bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/materialstyle/assets/images/MSIconNewColorV2.svg" style="width:30px; height:30px;">
+      TodoHx
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        {% endif %}
+          
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
 
-    <input id="search-list" type="text" placeholder="Search your list ..." name="search_input"
-        hx-get="{% url 'search-list' %}"
-        hx-trigger="focus, keyup changed delay:500ms"
-        hx-target="#search-results"
-        hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
-    <section id="search-results" class="hidden">
-    </section>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#create-list-form-modal">Create List</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <section id="search-container">
+                <input id="search-input" class="form-control me-2" type="text" placeholder="Search your list ..." name="search_input"
+                    hx-get="{% url 'search-list' %}"
+                    hx-trigger="focus, keyup changed delay:500ms"
+                    hx-target="#search-results"
+                    hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
+                <div id="search-results" class="hidden">
+                </div>
+            </section>
+          </form>
+        {% endif %}
+    </div>
+  </div>
 </nav>
