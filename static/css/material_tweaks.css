@@ -1,0 +1,162 @@
+:root, [data-bs-theme="light"] {
+--bs-primary: #9400ff;
+--bs-primary-hover: #7e00d9;
+--bs-primary-active: #7600cc;
+--bs-primary-subtle: #eaccff;
+--bs-primary-subtle-hover: #daa6ff;
+--bs-primary-subtle-active: #d499ff;
+--bs-primary-emphasis: #590099;
+--bs-primary-emphasis-hover: #430073;
+--bs-primary-border-subtle: #d499ff;
+--bs-primary-rgb: 148, 0, 255;
+--bs-text-on-primary: #ffffff;
+
+
+--bs-secondary: #5d5671;
+--bs-secondary-hover: #4f4960;
+--bs-secondary-active: #4a455a;
+--bs-secondary-subtle: #dfdde3;
+--bs-secondary-subtle-hover: #c6c4cd;
+--bs-secondary-subtle-active: #bebbc6;
+--bs-secondary-emphasis: #383444;
+--bs-secondary-emphasis-hover: #2a2733;
+--bs-secondary-border-subtle: #bebbc6;
+--bs-secondary-rgb: 93, 86, 113;
+--bs-text-on-secondary: #ffffff;
+
+--bs-tertiary: #e26ee5;
+--bs-tertiary-hover: #e684e9;
+--bs-tertiary-active: #e88bea;
+--bs-tertiary-subtle: #f9e2fa;
+--bs-tertiary-subtle-hover: #f5ccf6;
+--bs-tertiary-subtle-active: #f3c5f5;
+--bs-tertiary-emphasis: #884289;
+--bs-tertiary-emphasis-hover: #663167;
+--bs-tertiary-border-subtle: #f3c5f5;
+--bs-tertiary-rgb: 226, 110, 229;
+--bs-text-on-tertiary: #000000;
+
+
+--bs-success: #54b435;
+--bs-success-hover: #6ebf53;
+--bs-success-active: #76c35d;
+--bs-success-subtle: #ddf0d7;
+--bs-success-subtle-hover: #c3e5b8;
+--bs-success-subtle-active: #bbe1ae;
+--bs-success-emphasis: #326c20;
+--bs-success-emphasis-hover: #265118;
+--bs-success-border-subtle: #bbe1ae;
+--bs-success-rgb: 84, 180, 53;
+--bs-text-on-success: #000000;
+
+
+--bs-info: #64dfdf;
+--bs-info-hover: #7be4e4;
+--bs-info-active: #83e5e5;
+--bs-info-subtle: #e0f9f9;
+--bs-info-subtle-hover: #c9f4f4;
+--bs-info-subtle-active: #c1f2f2;
+--bs-info-emphasis: #3c8686;
+--bs-info-emphasis-hover: #2d6464;
+--bs-info-border-subtle: #c1f2f2;
+--bs-info-rgb: 100, 223, 223;
+--bs-text-on-info: #000000;
+
+
+--bs-danger: #e1004d;
+--bs-danger-hover: #bf0041;
+--bs-danger-active: #b4003e;
+--bs-danger-subtle: #f9ccdb;
+--bs-danger-subtle-hover: #f5a6c1;
+--bs-danger-subtle-active: #f399b8;
+--bs-danger-emphasis: #87002e;
+--bs-danger-emphasis-hover: #650023;
+--bs-danger-border-subtle: #f399b8;
+--bs-danger-rgb: 225, 0, 77;
+--bs-text-on-danger: #ffffff;
+
+
+--bs-border-radius: 1.01rem;
+--bs-border-width: 2px;
+}
+
+[data-bs-theme="dark"] {
+--bs-primary: #b959ff;
+--bs-primary-hover: #c77aff;
+--bs-primary-active: #ce8bff;
+--bs-primary-subtle: #3b0066;
+--bs-primary-subtle-hover: #430073;
+--bs-primary-subtle-active: #590099;
+--bs-primary-emphasis: #cf8cff;
+--bs-primary-emphasis-hover: #ca80ff;
+--bs-primary-border-subtle: #590099;
+--bs-primary-rgb: 185, 89, 255;
+--bs-text-on-primary: #000000;
+
+
+
+--bs-secondary: #9691a3;
+--bs-secondary-hover: #aba7b5;
+--bs-secondary-active: #b6b2bf;
+--bs-secondary-subtle: #25222d;
+--bs-secondary-subtle-hover: #2a2733;
+--bs-secondary-subtle-active: #383444;
+--bs-secondary-emphasis: #b6b3bf;
+--bs-secondary-emphasis-hover: #aeabb8;
+--bs-secondary-border-subtle: #383444;
+--bs-secondary-rgb: 150, 145, 163;
+--bs-text-on-secondary: #000000;
+
+--bs-tertiary: #eca1ee;
+--bs-tertiary-hover: #f0b4f1;
+--bs-tertiary-active: #f2bdf3;
+--bs-tertiary-subtle: #5a2c5c;
+--bs-tertiary-subtle-hover: #663167;
+--bs-tertiary-subtle-active: #884289;
+--bs-tertiary-emphasis: #f2bef3;
+--bs-tertiary-emphasis-hover: #f1b7f2;
+--bs-tertiary-border-subtle: #884289;
+--bs-tertiary-rgb: 236, 161, 238;
+--bs-text-on-tertiary: #000000;
+
+
+--bs-success: #90ce7c;
+--bs-success-hover: #a6d896;
+--bs-success-active: #b1dda3;
+--bs-success-subtle: #224815;
+--bs-success-subtle-hover: #265118;
+--bs-success-subtle-active: #326c20;
+--bs-success-emphasis: #b2dda4;
+--bs-success-emphasis-hover: #aada9a;
+--bs-success-border-subtle: #326c20;
+--bs-success-rgb: 144, 206, 124;
+--bs-text-on-success: #000000;
+
+
+--bs-info: #9aeaea;
+--bs-info-hover: #aeeeee;
+--bs-info-active: #b8f0f0;
+--bs-info-subtle: #285959;
+--bs-info-subtle-hover: #2d6464;
+--bs-info-subtle-active: #3c8686;
+--bs-info-emphasis: #b9f1f1;
+--bs-info-emphasis-hover: #b2efef;
+--bs-info-border-subtle: #3c8686;
+--bs-info-rgb: 154, 234, 234;
+--bs-text-on-info: #000000;
+
+
+--bs-danger: #ec598b;
+--bs-danger-hover: #f07aa2;
+--bs-danger-active: #f28bae;
+--bs-danger-subtle: #5a001f;
+--bs-danger-subtle-hover: #650023;
+--bs-danger-subtle-active: #87002e;
+--bs-danger-emphasis: #f28caf;
+--bs-danger-emphasis-hover: #f080a6;
+--bs-danger-border-subtle: #87002e;
+--bs-danger-rgb: 236, 89, 139;
+--bs-text-on-danger: #000000;
+
+
+}
