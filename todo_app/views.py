@@ -14,7 +14,10 @@ from django.db.models import Q
 from django.contrib import messages
 
 def index(req):
-    return render(req, "todo_app/index.html")
+    if req.user.is_authenticated:
+        return redirect("dashboard")
+    else:
+        return render(req, "todo_app/index.html")
 
 def logout(req):
     auth.logout(req)
