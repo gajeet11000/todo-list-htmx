@@ -8,6 +8,16 @@
 
 {% block body_html %}
 
+    <section id="search-container">
+        <input id="search-input" class="form-control me-2" type="text" placeholder="Search your list ..." name="search_input"
+            hx-get="{% url 'search-list' %}"
+                hx-trigger="focus, keyup changed delay:500ms"
+                hx-target="#search-results"
+                hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
+            <div id="search-results" class="hidden">
+        </div>
+    </section>
+
     <header id="todo-list" hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
     </header>
 
