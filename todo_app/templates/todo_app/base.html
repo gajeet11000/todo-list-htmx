@@ -41,6 +41,7 @@
 
     <!-- Custom JS -->
     <script src="{% static 'js/app.js' %}"></script>
+
 </head>
 
 {% include 'todo_app/navbar.html' %}
@@ -64,22 +65,25 @@
         integrity="sha384-rqhP61M9WSmzd7+ssgyoWP2I+R68vVHx7o+UmmIs6/Nxe8Lt1DoF6+0CKptZIXC0" 
         crossorigin="anonymous"></script>
     
+    <!-- HTMX JS -->
     <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+
+    <!-- Custom Theme JS -->
+    <script src="{% static 'js/theme.js' %}"></script>
 
     <script>
       document.body.addEventListener('htmx:configRequest', (event) => {
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
       })
     </script>
-    
-      
+
     {% for message in messages %}
-        <script>
-          triggerFeedbackMessages({
-              category: "{{message.extra_tags}}",
-              text: "{{message}}",
-              icon: "{{message.level_tag}}",
-          });
+      <script>
+        triggerFeedbackMessages({
+            category: "{{message.extra_tags}}",
+            text: "{{message}}",
+            icon: "{{message.level_tag}}",
+        });
         </script>
     {% endfor %}
       
