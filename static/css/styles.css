@@ -67,3 +67,43 @@ button.shade-btn span {
 #delete-list:hover {
     color: red;
 }
+
+/*======================NAVBAR====================== */
+
+/* WHEN THE NAVBAR IS NOT COLLAPSED */
+#toggle-theme {
+    margin-left: 5vw;
+}
+
+ul.ms-auto > li.nav-item {
+    margin: auto 0.5rem;
+}
+/* =================================== */
+
+/* WHEN THE NAVBAR IS COLLAPSED */
+@media (max-width: 576px) {
+    #toggle-theme {
+        margin: 0.8rem auto 0;
+    }
+
+    ul.ms-auto > li.nav-item {
+        margin: 0.8rem auto;
+    }
+}
+/* =================================== */
+
+
+/* NAV-LINKS BUTTON HOVER EFFECT */
+nav .btn-outline-light {
+    --mdc-ripple-color: rgb(var(--bs-white-rgb));
+    --bs-btn-hover-bg: rgba(var(--bs-white-rgb), .1);
+    --bs-btn-active-bg: rgba(var(--bs-white-rgb), .2);
+}
+/* =================================== */
+
+/* THEME MODE ICONS */
+span.fa-moon, span.fa-sun {
+    margin: 0 0.25rem;
+}
+/* =================================== */
+/* ================================================== */
