@@ -4,36 +4,9 @@
 
 <section>
     <div>
-    <ul>
+    <ul id="all-tasks">
         {% for task in tasks %}
-            <li>
-                <input type="checkbox"
-                    id="task_{{task.id}}"
-                    hx-patch="{% url 'toggle-completion' task.id %}"
-                    hx-swap="none"
-                        {% if task.completed %}
-                            checked
-                        {% endif %}>
-                <label for="task_{{task.id}}">{{task.name}}</label>
-                <span>
-                    <span>
-                        <button class="btn btn-link"
-                        hx-patch="{% url 'update-task' task.id %}"
-                        hx-target="closest li"
-                        hx-swap="outerHTML">
-                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                        </button>
-                    </span>
-                    <span>
-                        <button class="btn btn-link"
-                        hx-delete="{% url 'delete-task' task.id %}"
-                        hx-target="closest li"
-                        hx-swap="delete">
-                            <i class="fa-regular fa-circle-xmark fa-lg"></i>
-                        </button>
-                    </span>
-                </span>
-            </li>
+            {% include 'todo_app/partials/single_task.html' %}
         {% endfor %}
     </ul>
     </div>
@@ -41,7 +14,7 @@
         <form
         method="post" 
         hx-post="{% url 'save-task' %}"
-        hx-target="header"
+        hx-target="#todo-list"
         hx-on::after-request="this.reset()">
             <input type="hidden" name="list_id" value="{{list.id}}">
             <input type="text" name="new_task" placeholder="Add new task ...">
