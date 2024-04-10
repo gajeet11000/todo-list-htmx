@@ -14,7 +14,7 @@ ul{
                     /* SLIDE IN SHADE WITH BUTTONS */
 #list-title{
     display: inline-block;
-    font-size: 4rem;
+    font-size: 3rem;
     position: relative;
     border-radius: 1.2rem;
     overflow: hidden;
@@ -81,13 +81,17 @@ ul.ms-auto > li.nav-item {
 /* =================================== */
 
 /* WHEN THE NAVBAR IS COLLAPSED */
-@media (max-width: 576px) {
+@media only screen and (max-width: 576px) {
     #toggle-theme {
         margin: 0.8rem auto 0;
     }
 
     ul.ms-auto > li.nav-item {
         margin: 0.8rem auto;
+    }
+
+    #app-container {
+        width: 70vw;
     }
 }
 /* =================================== */
@@ -107,3 +111,122 @@ span.fa-moon, span.fa-sun {
 }
 /* =================================== */
 /* ================================================== */
+
+
+
+/* ============TODO LIST MAIN APP=============== */
+
+#app-container {
+    width: 30vw;
+    margin: 0 auto;
+}
+
+/* =================RESPONSIVENESS====================== */
+@media only screen and (max-width: 1400px) {
+    #app-container {
+        width: 30vw;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #app-container {
+        width: 35vw;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #app-container {
+        width: 40vw;
+    }
+}
+@media only screen and (max-width: 768px) {
+    #app-container {
+        width: 45vw;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    #app-container {
+        width: 60vw;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #app-container {
+        width: 80vw;
+    }
+}
+/* ====================================== */
+
+#filter-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5vh;
+}
+
+#todo-list {
+    border-radius: var(--bs-border-radius);
+    border-width: var(--bs-border-width);
+    margin-top: 3vh;
+}
+
+#all-tasks {
+    padding: 0;
+}
+
+#app-section {
+    margin-top: 4vh;
+}
+
+.task-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.task-container label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+/* =============FILTER BUTTON CSS POP EFFECT============*/
+
+div.form-check input:not(:checked) + label {
+    color: var(--bs-secondary-emphasis-hover);
+    background-color: var(--bs-secondary);
+    box-shadow: 0px 4px 1px 0px var(--bs-secondary-active);
+    transform: translateY(3px);
+    transition: all 0.2s linear;
+}
+
+div.form-check input:not(:checked) + label:hover {
+    color: var(--bs-secondary-emphasis-hover);
+    background-color: var(--bs-secondary);
+    box-shadow: 0px 4px 1px 0px var(--bs-secondary-emphasis);
+}
+
+div.form-check input:checked + label.all-btn {
+    background-color: var(--bs-primary);
+    color: var(--bs-text-on-primary);
+    box-shadow: 0px 8px 1px 0px var(--bs-primary-emphasis);
+    transform: translateY(-3px);
+    transition: all 0.2s linear;
+}
+div.form-check input:checked + label.pending-btn {
+    background-color: var(--bs-danger);
+    color: var(--bs-text-on-danger);
+    box-shadow: 0px 8px 1px 0px var(--bs-danger-emphasis);
+    transform: translateY(-3px);
+    transition: all 0.2s linear;
+}
+div.form-check input:checked + label.completed-btn {
+    background-color: var(--bs-success);
+    color: var(--bs-text-on-success);
+    box-shadow: 0px 8px 1px 0px var(--bs-success-emphasis);
+    transform: translateY(-3px);
+    transition: all 0.2s linear;
+}
+
+/* =================================== */

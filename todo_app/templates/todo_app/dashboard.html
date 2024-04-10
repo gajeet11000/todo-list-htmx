@@ -8,18 +8,48 @@
 
 {% block body_html %}
 
-    <section id="search-container">
-        <input id="search-input" class="form-control me-2" type="text" placeholder="Search your list ..." name="search_input"
-            hx-get="{% url 'search-list' %}"
-                hx-trigger="focus, keyup changed delay:500ms"
-                hx-target="#search-results"
-                hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
-            <div id="search-results" class="hidden">
+    <section id="app-section" class="container-fluid">
+        <div id="app-container">
+            <div id="search-container">
+                <input id="search-input" class="form-control me-2" type="text" placeholder="Search your list ..." name="search_input"
+                    hx-get="{% url 'search-list' %}"
+                        hx-trigger="focus, keyup changed delay:500ms"
+                        hx-target="#search-results"
+                        hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
+                    <div id="search-results" class="hidden">
+                </div>
+            </div>
+
+            <div id="filter-container">
+                <div class="form-check">
+                    <input class="btn-check" type="radio" name="tasks-filter" id="all-tasks-filter" checked>
+
+                    <label class="btn btn-primary all-btn" for="all-tasks-filter">
+                        All tasks
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="btn-check" type="radio" name="tasks-filter" id="pending-tasks-filter">
+
+                    <label class="btn btn-danger pending-btn" for="pending-tasks-filter">
+                        Pending
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="btn-check" type="radio" name="tasks-filter" id="completed-tasks-filter">
+
+                    <label class="btn btn-success completed-btn" for="completed-tasks-filter">
+                        Completed
+                    </label>
+                </div>
+            </div>
+
+            <div id="todo-list"
+                class="border d-flex justify-content-center flex-column align-items-center"
+                hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
+            </div>
         </div>
     </section>
-
-    <header id="todo-list" hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
-    </header>
 
     {% include 'todo_app/partials/create_list_modal.html' %}
 

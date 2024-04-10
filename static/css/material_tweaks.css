@@ -26,4 +26,7 @@
 --bs-primary-border-subtle: #392576;
 --bs-primary-rgb: 151, 129, 217;
 --bs-text-on-primary: #000000;
+
+
+--bs-secondary-emphasis-hover: #5e6266;
 }
