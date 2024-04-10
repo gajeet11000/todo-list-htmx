@@ -3,13 +3,11 @@
 </section>
 
 <section>
-    <div>
     <ul id="all-tasks">
         {% for task in tasks %}
             {% include 'todo_app/partials/single_task.html' %}
         {% endfor %}
     </ul>
-    </div>
     <div>
         <form
         method="post" 
