@@ -10,41 +10,20 @@
 
     <section id="app-section" class="container-fluid">
         <div id="app-container">
+
             <div id="search-container">
-                <input id="search-input" class="form-control me-2" type="text" placeholder="Search your list ..." name="search_input"
-                    hx-get="{% url 'search-list' %}"
-                        hx-trigger="focus, keyup changed delay:500ms"
-                        hx-target="#search-results"
-                        hx-on:focus="htmx.removeClass('#search-results', 'hidden')">
-                    <div id="search-results" class="hidden">
-                </div>
+                {% include 'todo_app/dashboard_contents/search_bar_content.html' %}
             </div>
-            <div id="filter-container">
-                {% include 'todo_app/partials/todo_filter_content.html' %}
-            </div>
+
             <div id="todo-list"
                 class="border d-flex justify-content-center flex-column align-items-center"
                 hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">
             </div>
+            
         </div>
     </section>
 
     {% include 'todo_app/partials/create_list_modal.html' %}
-
-    <!-- <footer>
-        <h3>
-            Contact
-        </h3>
-        <h3>
-            Made with love by Ajeet
-        </h3>
-        <h3>
-            copyright
-        </h3>
-        <h3>
-            social links
-        </h3>
-    </footer> -->
 
     <script>
     $(document).on('click', function(event) {
@@ -60,4 +39,3 @@
     </script>
 
 {% endblock body_html %}
-    

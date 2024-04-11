@@ -13,11 +13,13 @@ from django.db.models import Q
 
 from django.contrib import messages
 
+from .custom_scripts.template_paths import *
+
 def index(req):
     if req.user.is_authenticated:
         return redirect("dashboard")
     else:
-        return render(req, "todo_app/index.html")
+        return render(req, templates["index"])
 
 def logout(req):
     auth.logout(req)
@@ -28,7 +30,7 @@ def register(req):
     if req.method == "GET":
         
         new_form = CreateUserForm()
-        return render(req, "todo_app/register.html", {"form": new_form})
+        return render(req, templates["register"], {"form": new_form})
     
     elif req.method == "POST":
         
@@ -44,7 +46,7 @@ def login(req):
     if req.method == "GET":
         
         new_form = LoginForm()
-        return render(req, "todo_app/login.html", {"form": new_form})
+        return render(req, templates["login"], {"form": new_form})
     
     elif req.method == "POST":
         
@@ -63,12 +65,12 @@ def login(req):
                 
                 return redirect("dashboard")
         else:
-            return render(req, "todo_app/login.html", {"form": filled_form})
+            return render(req, templates["login"], {"form": filled_form})
     
 
 def dashboard(req):
     if req.method == "GET":
-        return render(req, "todo_app/dashboard.html")
+        return render(req, templates["dashboard"])
     
 def save_task(req):
     if req.method == "POST":
@@ -85,20 +87,20 @@ def save_task(req):
         new_task.save()
         all_tasks = Task.objects.filter(list_id=list_id)
         
-        return render(req, "todo_app/partials/display_list.html", {"tasks": all_tasks, "list": list})
+        return render(req, dashboard_contents["todo_list"], {"tasks": all_tasks, "list": list, "filter_toggled": "all"})
         
     
 def update_task(req, task_id):
     task = Task.objects.get(id=task_id)
     if req.method == "GET":
-        return render(req, "todo_app/partials/single_task.html", {"task": task})
+        return render(req, dashboard_contents["single_task"], {"task": task})
     elif req.method == "PATCH":
-        return render(req, "todo_app/partials/patch_task_container.html", {"task": task})
+        return render(req, patch_contents["task"], {"task": task})
     elif req.method == "POST":
         new_task_name = req.POST.get("updated_task")
         task.name=new_task_name
         task.save()
-        return render(req, "todo_app/partials/single_task.html", {"task": task})
+        return render(req, dashboard_contents["single_task"], {"task": task})
     
 def toggle_completion(req, task_id):
     if req.method == "PATCH":
@@ -153,7 +155,7 @@ def search_list(req):
         else:
             context["search_results"] = List.objects.filter(user=req.user).order_by("-date")
         
-        return render(req, "todo_app/partials/search_result.html", context)
+        return render(req, dashboard_contents["search_result"], context)
     
 def delete_list(req, list_id):
     if req.method == "DELETE":
@@ -167,18 +169,31 @@ def delete_list(req, list_id):
 def fetch_list(req):
     if req.method == "GET":
         list_id = req.GET.get("list_id", None)
+        filter = req.GET.get("filter", None)
         
         if list_id:
+            list = List.objects.get(user=req.user, id=list_id)
+            
+            if filter == "pending":
+                tasks = Task.objects.filter(list_id=list, completed=False)
+            elif filter == "completed":
+                tasks = Task.objects.filter(list_id=list, completed=True)
+            else:
+                tasks = Task.objects.filter(list_id=list)
+                filter = "all"
+                
             context = {
-                "list" : List.objects.get(user=req.user, id=list_id),
-                "tasks" : Task.objects.filter(list_id=list_id),
+                "list" : list,
+                "tasks": tasks,
+                "filter_toggled": filter
             }
         else:
             lists = List.objects.filter(user=req.user)
             
             context = {
                 "list": None,
-                "tasks": None
+                "tasks": None,
+                "filter_toggled": "all"
             }
             
             if lists.exists():
@@ -194,17 +209,16 @@ def fetch_list(req):
                 )
                 context['list'] = new_list
                 # context["tasks"] is already None
-                
-        return render(req, "todo_app/partials/display_list.html", context)
+        return render(req, dashboard_contents["todo_list"], context)
     
 def update_list(req, list_id):
     list = List.objects.get(id=list_id)
     if req.method == "GET":
-        return render(req, "todo_app/partials/list_title.html", {"list": list})
+        return render(req, dashboard_contents["list_title"], {"list": list})
     elif req.method == "PATCH":
-        return render(req, "todo_app/partials/patch_list_container.html", {"list": list})
+        return render(req, patch_contents["list"], {"list": list})
     elif req.method == "POST":
         new_list_title = req.POST.get("updated_list")
         list.title=new_list_title
         list.save()
-        return render(req, "todo_app/partials/list_title.html", {"list": list})
+        return render(req, dashboard_contents["list_title"], {"list": list})
