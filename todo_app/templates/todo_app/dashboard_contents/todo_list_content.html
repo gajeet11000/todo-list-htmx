@@ -1,0 +1,27 @@
+<div id="filter-container">
+    {% include 'todo_app/dashboard_contents/filter_content.html' %}
+</div>
+
+<div id="title-container">
+    {% include 'todo_app/dashboard_contents/list_title_content.html' %}
+</div>
+
+<div id="tasks-container">
+    <ul id="all-tasks">
+        {% for task in tasks %}
+            {% include 'todo_app/dashboard_contents/single_task_content.html' %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="new-task-form-container">
+    <form
+        method="post"
+        hx-post="{% url 'save-task' %}"
+        hx-target="#todo-list"
+        hx-on::after-request="this.reset()">
+            <input type="hidden" name="list_id" value="{{list.id}}">
+            <input type="text" name="new_task" placeholder="Add new task ...">
+            <button type="submit">+</button>
+    </form>
+</div>

@@ -1,0 +1,5 @@
+<input type="text" id="list_{{list.id}}" name="updated_list" value="{{list.title}}"
+autofocus onfocus="this.select()"
+hx-post="{% url 'update-list' list.id %}"
+hx-swap="outerHTML"
+hx-trigger="keyup[keyCode==13], blur">

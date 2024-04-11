@@ -1,0 +1,12 @@
+<ul>
+    {% for list in search_results %}
+        <li>
+            <button type="button"
+                hx-get="{% url 'fetch-list' %}?list_id={{list.id}}"
+                hx-target="#todo-list">
+                {{list.title}}
+            </button>
+        </li> 
+    {% endfor %}
+</ul>
+    
