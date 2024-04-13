@@ -1,9 +1,10 @@
-<ul>
+<ul id="search-result-ul">
     {% for list in search_results %}
         <li>
-            <button type="button"
+            <button type="button" class="search-item-btn"
                 hx-get="{% url 'fetch-list' %}?list_id={{list.id}}"
-                hx-target="#todo-list">
+                hx-target="#todo-list"
+                hx-on:click="htmx.addClass('#search-results', 'hidden')">
                 {{list.title}}
             </button>
         </li> 
