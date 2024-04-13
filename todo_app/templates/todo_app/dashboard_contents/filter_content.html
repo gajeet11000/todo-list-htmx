@@ -8,7 +8,7 @@
 
         <label class="btn btn-primary all-btn" for="all-tasks-filter"
         hx-get="{% url 'fetch-list' %}?list_id={{list.id}}"
-        hx-trigger="change from:#all-tasks-filter"
+        hx-trigger="change from:#all-tasks-filter delay:200ms"
         hx-target="#todo-list">
             All tasks
         </label>
@@ -21,7 +21,7 @@
 
         <label class="btn btn-danger pending-btn" for="pending-tasks-filter"
         hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=pending"
-        hx-trigger="change from:#pending-tasks-filter"
+        hx-trigger="change from:#pending-tasks-filter delay:200ms"
         hx-target="#todo-list">
             Pending
         </label>
@@ -34,7 +34,7 @@
 
         <label class="btn btn-success completed-btn" for="completed-tasks-filter"
         hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=completed"
-        hx-trigger="change from:#completed-tasks-filter"
+        hx-trigger="change from:#completed-tasks-filter delay:200ms"
         hx-target="#todo-list">
             Completed
         </label>
