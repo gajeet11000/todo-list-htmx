@@ -15,6 +15,10 @@
                 {% include 'todo_app/dashboard_contents/search_bar_content.html' %}
             </div>
 
+            <div id="filter-container">
+                <!-- contents will be swapped my hx-swap-oob -->
+            </div>
+
             <div id="todo-list"
                 class="border d-flex justify-content-center flex-column align-items-center"
                 hx-get="{% url 'fetch-list' %}" hx-trigger="load, customDeleteEvent from:body">

@@ -1,39 +1,42 @@
-<div class="form-check">
-    <input class="btn-check" type="radio" name="tasks-filter" id="all-tasks-filter"
-    {% if filter_toggled == "all" %}
-        checked
-    {% endif %}>
+<div id="filter-container"
+    hx-swap-oob="true">
+    <div class="form-check">
+        <input class="btn-check" type="radio" name="tasks-filter" id="all-tasks-filter"
+        {% if filter_toggled == "all" %}
+            checked
+        {% endif %}>
 
-    <label class="btn btn-primary all-btn" for="all-tasks-filter"
-    hx-get="{% url 'fetch-list' %}?list_id={{list.id}}"
-    hx-trigger="change from:#all-tasks-filter"
-    hx-target="#todo-list">
-        All tasks
-    </label>
-</div>
-<div class="form-check">
-    <input class="btn-check" type="radio" name="tasks-filter" id="pending-tasks-filter"
-    {% if filter_toggled == "pending" %}
-        checked
-    {% endif %}>
+        <label class="btn btn-primary all-btn" for="all-tasks-filter"
+        hx-get="{% url 'fetch-list' %}?list_id={{list.id}}"
+        hx-trigger="change from:#all-tasks-filter"
+        hx-target="#todo-list">
+            All tasks
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="btn-check" type="radio" name="tasks-filter" id="pending-tasks-filter"
+        {% if filter_toggled == "pending" %}
+            checked
+        {% endif %}>
 
-    <label class="btn btn-danger pending-btn" for="pending-tasks-filter"
-    hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=pending"
-    hx-trigger="change from:#pending-tasks-filter"
-    hx-target="#todo-list">
-        Pending
-    </label>
-</div>
-<div class="form-check">
-    <input class="btn-check" type="radio" name="tasks-filter" id="completed-tasks-filter"
-    {% if filter_toggled == "completed" %}
-        checked
-    {% endif %}>
+        <label class="btn btn-danger pending-btn" for="pending-tasks-filter"
+        hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=pending"
+        hx-trigger="change from:#pending-tasks-filter"
+        hx-target="#todo-list">
+            Pending
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="btn-check" type="radio" name="tasks-filter" id="completed-tasks-filter"
+        {% if filter_toggled == "completed" %}
+            checked
+        {% endif %}>
 
-    <label class="btn btn-success completed-btn" for="completed-tasks-filter"
-    hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=completed"
-    hx-trigger="change from:#completed-tasks-filter"
-    hx-target="#todo-list">
-        Completed
-    </label>
+        <label class="btn btn-success completed-btn" for="completed-tasks-filter"
+        hx-get="{% url 'fetch-list' %}?list_id={{list.id}}&filter=completed"
+        hx-trigger="change from:#completed-tasks-filter"
+        hx-target="#todo-list">
+            Completed
+        </label>
+    </div>
 </div>
