@@ -13,11 +13,14 @@ ul{
 
                     /* SLIDE IN SHADE WITH BUTTONS */
 #list-title{
-    display: inline-block;
+    display: flex;
     font-size: 3rem;
     position: relative;
     border-radius: 1.2rem;
     overflow: hidden;
+    margin: 0;
+    width: 70%;
+    justify-content: center;
 }
 
 .shade {
@@ -118,13 +121,17 @@ span.fa-moon, span.fa-sun {
 
 #app-container {
     width: 30vw;
-    margin: 0 auto;
+    margin: 45px auto 0 auto;
 }
 
 /* =================RESPONSIVENESS====================== */
 @media only screen and (max-width: 1400px) {
     #app-container {
         width: 30vw;
+    }
+
+    #all-tasks {
+        margin: 0 25px;
     }
 }
 
@@ -172,20 +179,42 @@ span.fa-moon, span.fa-sun {
     border-radius: var(--bs-border-radius);
     border-width: var(--bs-border-width);
     margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0 0 0;
+    padding: 0;
+}
+
+#tasks-container {
+    width: 100%;
+    flex: 2;
+    margin: 3rem auto;
+}
+
+#new-task-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
 }
 
 #all-tasks {
     padding: 0;
-}
-
-#app-section {
-    margin-top: 4vh;
+    margin: 0 50px;
 }
 
 .task-container {
     display: flex;
     justify-content: center;
     padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 .task-container label {
@@ -296,3 +325,43 @@ div.form-check input:checked + label.completed-btn {
 .search-item-btn:active {
     background-color: var(--bs-primary-subtle-active);
 }
+
+
+
+/* //////////////////////////////////////////////// */
+
+#new-task-input {
+    width: 20vw;
+    margin-right: .6rem;
+}
+
+#new-task-btn {
+    text-align: center;
+    border-radius: 100%;
+    width: 55px;
+    height: 55px;
+    margin-left: .6rem;
+    padding-bottom: 10px;
+    background-color: var(--bs-primary);
+    color: var(--bs-text-on-primary);
+    box-shadow: 2px 4px 0px 0px var(--bs-primary-emphasis);
+    transform: rotateY(25deg);
+    transition: all 0.05s linear;
+}
+
+#new-task-btn:active {
+    box-shadow: 1px 1px 0 0 var(--bs-primary-subtle);
+    transform: translateX(2px) translateY(4px) rotateY(25deg);
+    transition: all 0.05s linear;
+}
+
+#new-task-btn span{
+    font-size: 1.5rem;
+}
+
+#new-task-btn:active span{ 
+    color: var(--bs-text-on-dark);
+    text-shadow: 0 0 5px var(--bs-text-on-dark);
+}
+
+

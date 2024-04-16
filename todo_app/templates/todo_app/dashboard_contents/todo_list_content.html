@@ -15,11 +15,12 @@
 <div id="new-task-form-container">
     <form
         method="post"
+        class="d-flex"
         hx-post="{% url 'save-task' %}"
         hx-target="#todo-list"
         hx-on::after-request="this.reset()">
             <input type="hidden" name="list_id" value="{{list.id}}">
-            <input type="text" name="new_task" placeholder="Add new task ...">
-            <button type="submit">+</button>
+            <input id="new-task-input" type="text" class="form-control" name="new_task" placeholder="Add new task ...">
+            <button id="new-task-btn" type="submit" class="btn"><span class="fas fa-plus"></span></button>
     </form>
 </div>
