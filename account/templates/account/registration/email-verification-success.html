@@ -1,0 +1,16 @@
+{% extends 'todo_app/base.html' %}
+
+
+{% block title_html %}
+   Register | TodoHx 
+{% endblock title_html %}
+
+
+{% block body_html %}
+
+<h5> <strong> Your account is now active! </strong> </h5>
+
+<p> Please proceed to <a href="{% url 'login' %}" class="btn btn-primary">Login</a>. </p>
+
+{% endblock body_html %}
+    

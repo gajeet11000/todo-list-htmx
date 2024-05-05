@@ -15,58 +15,19 @@ from django.contrib import messages
 
 from .custom_scripts.template_paths import *
 
+
+
 def index(req):
     if req.user.is_authenticated:
         return redirect("dashboard")
     else:
         return render(req, templates["index"])
 
-def logout(req):
-    auth.logout(req)
-    messages.success(req, "Logged out successfully", extra_tags="logout")
-    return redirect("index")
 
-def register(req):
-    if req.method == "GET":
-        
-        new_form = CreateUserForm()
-        return render(req, templates["register"], {"form": new_form})
-    
-    elif req.method == "POST":
-        
-        filled_form = CreateUserForm(req.POST)
-        if filled_form.is_valid():
-            filled_form.save()
-            
-            messages.success(req, "User created successfully", extra_tags="register")
-            
-            return redirect("login")
 
-def login(req):
-    if req.method == "GET":
-        
-        new_form = LoginForm()
-        return render(req, templates["login"], {"form": new_form})
-    
-    elif req.method == "POST":
-        
-        filled_form = LoginForm(req, req.POST)
-        
-        if filled_form.is_valid():
-            username = req.POST.get("username")
-            password = req.POST.get("password")
-            
-            user = auth.authenticate(req, username=username, password=password)
-            
-            if user is not None:
-                auth.login(req, user)
-                
-                messages.success(req, "Signed in successfully", extra_tags="login")
-                
-                return redirect("dashboard")
-        else:
-            return render(req, templates["login"], {"form": filled_form})
-    
+
+
+
 
 def dashboard(req):
     if req.method == "GET":
