@@ -1,0 +1,38 @@
+{% extends 'todo_app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title_html %}
+   Profile Management | TodoHx 
+{% endblock title_html %}
+
+{% block body_html %}
+<br>
+<div class="container shadow-md p-5 form-layout">
+   <h3> Update username and email </h3>
+   <p> You may change your username and email below: </p>
+   <br>
+   <form method="POST" autocomplete="off">
+       {% csrf_token %}
+       {{ UserUpdateForm|crispy }}
+       <br> 
+       <button class="btn btn-primary btn-md w-100 btn-block p-3" type="submit">Update</button>
+   </form>
+</div>
+<br>
+<div class="container shadow-md p-5 form-layout">
+    <h3> Change Password </h3>
+    <p> Click the button below to reset your password: </p>
+    <br>
+    <a href="{% url 'reset_password' %}" class="btn btn-primary btn-md w-100 btn-block p-3">Reset Password</a>
+ </div>
+ <br>
+
+<div class="container shadow-md p-5 form-layout">
+   <h3> Delete your account </h3>
+   <p> If you would like to close your account, please proceed below: </p>
+   <br>
+   <a href="{% url 'delete-account' %}" class="btn btn-danger btn-md w-100 btn-block p-3">Proceed to delete your account</a>
+</div>
+<br>
+{% endblock body_html %}

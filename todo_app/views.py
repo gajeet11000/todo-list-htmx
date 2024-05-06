@@ -5,7 +5,6 @@ from datetime import date
 from django.contrib import auth
 
 from . models import List, Task
-from . forms import CreateUserForm, LoginForm
 
 from django.core.exceptions import ValidationError
 
@@ -22,11 +21,6 @@ def index(req):
         return redirect("dashboard")
     else:
         return render(req, templates["index"])
-
-
-
-
-
 
 
 def dashboard(req):

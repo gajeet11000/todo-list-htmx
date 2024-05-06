@@ -1,16 +1,28 @@
 {% extends 'todo_app/base.html' %}
-
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block title_html %}
    Register | TodoHx 
 {% endblock title_html %}
 
-
 {% block body_html %}
-   <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Register</button>
-   </form> 
+<br>
+<div class="container shadow-md p-5 form-layout">
+   <h3> Create your account </h3>
+   <h5> Manage your tasks! </h5>
+   <br>
+   <br>
+   <form method="POST" autocomplete="off">
+       {% csrf_token %}
+       {{form|crispy}}
+       <br> 
+       <button class="btn btn-primary btn-md w-100 btn-block p-3" type="submit">  Create account </button>
+   </form>
+   <br>
+   <div class="text-center">
+       <a href="{% url 'login' %}"> Already have an account? </a>
+   </div>
+</div>
+<br>
 {% endblock body_html %}
-    

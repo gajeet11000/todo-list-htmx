@@ -364,4 +364,11 @@ div.form-check input:checked + label.completed-btn {
     text-shadow: 0 0 5px var(--bs-text-on-dark);
 }
 
+.form-layout{
+
+    border-radius: 20px;
+    width: 500px;
+    border: 2px solid lavender;
+
+}
 
