@@ -9,6 +9,7 @@ django-htmx==1.17.3
 django-storages==1.14.3
 django-utils-six==2.0
 jmespath==1.0.1
+psycopg2-binary==2.9.9
 python-dateutil==2.9.0.post0
 s3transfer==0.10.1
 six==1.16.0
