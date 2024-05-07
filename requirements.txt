@@ -6,6 +6,7 @@ Django==5.0.3
 django-crispy-forms==2.1
 django-environ==0.11.2
 django-htmx==1.17.3
+django-storages==1.14.3
 django-utils-six==2.0
 jmespath==1.0.1
 python-dateutil==2.9.0.post0
